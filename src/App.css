@@ -1,36 +1,36 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   background-color: #121212;
-  width: 100vw;
-  height: 100vh;
-  /* display: flex; */
   color: white;
-}
-
-body {
-  padding: 0%;
-  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .navbar {
   height: 60px;
   width: 100%;
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px solid grey;
-  display: grid;
-  place-items: center;
 }
 
 nav h1 {
-  color: inherit;
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  /* color: rgb(93, 90, 90); */
   font-size: 45px;
 }
+
 .game {
-  width: 100vw;
-  height: calc(100vh - 170px);
+  width: 100%;
   display: flex;
   align-items: center;
   padding-top: 50px;
@@ -38,27 +38,26 @@ nav h1 {
 }
 
 .board {
-  width: 450px;
-  height: 500px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 10px;
 }
 
-
-
 .row {
-  flex: 33%;
   display: flex;
-  flex-direction: row;
-  margin: 3px;
+  gap: 5px;
+  justify-content: center;
 }
 
 .letter {
-  flex: 33%;
-  height: 95%;
-  border: 1px solid grey;
-  margin: 3px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  max-width: 60px;
+  background-color: transparent;
+  border: 2px solid grey;
   display: grid;
   place-items: center;
   font-size: 30px;
@@ -79,78 +78,60 @@ nav h1 {
   background-color: #3a393c;
 }
 
-
 .keyboard {
   width: 100%;
   max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 40px auto 0;
   padding: 0 10px;
-  max-height: 300px;
-  margin-top: 60px;
 }
 
-
-.line1 {
-  flex: 33%;
-  display: flex;
-  flex-direction: row;
+.line1, .line2, .line3 {
   display: flex;
   justify-content: center;
-  margin: 5px;
-}
-.line2 {
-  flex: 33%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 5px;
-}
-.line3 {
-  flex: 33%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 5px;
+  gap: 5px;
 }
 
 .key {
-  width: 50px;
-  height: 70px;
-  margin: 5px;
+  width: 40px;
+  height: 60px;
   border-radius: 4px;
   display: grid;
   place-items: center;
-  font-size: 20px;
+  font-size: 18px;
   background-color: grey;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   cursor: pointer;
 }
 
-.big {
-  width: 100px;
+.key.correct {
+  background-color: #6aaa64;
 }
+
+.key.almost {
+  background-color: #c9b458;
+}
+
+.key.disabled, .key.error {
+  background-color: #3a393c;
+}
+
+.big {
+  width: 70px;
+}
+
 .disabled {
   background-color: #787c7e;
 }
 
-.key.correct {
-  background-color: #6aaa64; /* green */
-  color: white;
-}
-.key.almost {
-  background-color: #c9b458; /* yellow */
-  color: white;
-}
-.key.disabled {
-  background-color: #3a393c; /* gray */
-  color: white;
-}
-
-
-/* THEME: Light Mode */
+/* Light Theme */
 .App.light {
   background-color: #f0f0f0;
-  color: rgb(18, 17, 17);
+  color: #121212;
 }
 
 .App.light .letter {
@@ -178,6 +159,7 @@ nav h1 {
   color: white;
 }
 
+/* Flip Animation */
 @keyframes flip {
   0% {
     transform: rotateX(0deg);
@@ -194,11 +176,11 @@ nav h1 {
   animation: flip 0.6s ease;
 }
 
+/* Theme Toggle */
 .theme-toggle {
   position: absolute;
   right: 20px;
-  margin-top: 30px;
-  transform: translateY(-50%);
+  top: 15px;
   background: white;
   border: 1px solid #888;
   border-radius: 5px;
@@ -207,22 +189,21 @@ nav h1 {
   outline: none;
 }
 
-
 .App.dark .theme-toggle {
   background-color: #1e1e1e;
   color: white;
   border: 1px solid #ccc;
 }
 
-
+/* Footer */
 footer {
   margin: 20px;
-  padding: auto;
   text-align: center;
-  color: inherit;
   font-size: 18px;
+  color: inherit;
 }
 
+/* Play Again Button */
 .play-again {
   margin-top: 20px;
   padding: 10px 20px;
@@ -240,29 +221,7 @@ footer {
   background-color: #4a8b4e;
 }
 
-/* --- Responsive Fix for Very Small Screens --- */
-@media (max-width: 480px) {
-  .letter {
-    font-size: 4.5vw;
-    margin: 3px;
-  }
-
-  .key {
-    font-size: 12px;
-    min-width: 26px;
-    height: 40px;
-  }
-
-  .theme-toggle {
-    padding: 3px 8px;
-    font-size: 12px;
-  }
-
-  nav h1 {
-    font-size: 22px;
-  }
-}
-
+/* Error Toast */
 .error-toast {
   position: fixed;
   bottom: 320px;
@@ -282,4 +241,65 @@ footer {
   10% { opacity: 1; transform: translateX(-50%) translateY(0); }
   90% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+
+/* 🔽 Responsive Design */
+@media (max-width: 768px) {
+  nav h1 {
+    font-size: 32px;
+  }
+
+  .letter {
+    font-size: 20px;
+    max-width: 45px;
+  }
+
+  .key {
+    font-size: 14px;
+    width: 30px;
+    height: 45px;
+  }
+
+  .big {
+    width: 60px;
+  }
+
+  .theme-toggle {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .play-again {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav h1 {
+    font-size: 24px;
+  }
+
+  .letter {
+    font-size: 16px;
+    max-width: 38px;
+  }
+
+  .key {
+    font-size: 12px;
+    width: 26px;
+    height: 40px;
+  }
+
+  .big {
+    width: 50px;
+  }
+
+  .board {
+    padding: 0 4px;
+  }
+
+  .play-again {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
