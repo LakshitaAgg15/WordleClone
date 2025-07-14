@@ -1,26 +1,25 @@
-/* Global Styles */
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .App {
   text-align: center;
   background-color: #121212;
-  color: white;
+  width: 100vw;
   min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
 
 .navbar {
   height: 60px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-bottom: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 nav h1 {
@@ -29,43 +28,45 @@ nav h1 {
   font-size: 45px;
 }
 
+/* Game Area */
 .game {
-  width: 100%;
+  flex-grow: 1;
   display: flex;
-  align-items: center;
-  padding-top: 50px;
   flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
 }
 
+/* Game Board */
 .board {
+  width: 100%;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  max-width: 500px;
+  margin: 0 auto;
   padding: 0 10px;
 }
 
 .row {
   display: flex;
-  gap: 5px;
   justify-content: center;
+  margin: 3px 0;
+  gap: 5px;
 }
 
 .letter {
-  width: 100%;
-  aspect-ratio: 1/1;
-  max-width: 60px;
-  background-color: transparent;
-  border: 2px solid grey;
+  width: 60px;
+  height: 60px;
+  border: 1px solid grey;
   display: grid;
   place-items: center;
-  font-size: 30px;
-  font-weight: bolder;
-  color: white;
+  font-size: 28px;
+  font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
+/* Letter Colors */
 #correct {
   background-color: #528d4e;
 }
@@ -78,26 +79,26 @@ nav h1 {
   background-color: #3a393c;
 }
 
+/* Keyboard */
 .keyboard {
   width: 100%;
   max-width: 700px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 5px;
-  margin: 40px auto 0;
-  padding: 0 10px;
+  margin-top: 30px;
 }
 
 .line1, .line2, .line3 {
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .key {
-  width: 40px;
-  height: 60px;
+  min-width: 30px;
+  height: 50px;
   border-radius: 4px;
   display: grid;
   place-items: center;
@@ -106,8 +107,18 @@ nav h1 {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   cursor: pointer;
+  padding: 4px;
 }
 
+.big {
+  min-width: 60px;
+}
+
+.disabled {
+  background-color: #787c7e;
+}
+
+/* Key states */
 .key.correct {
   background-color: #6aaa64;
 }
@@ -116,22 +127,14 @@ nav h1 {
   background-color: #c9b458;
 }
 
-.key.disabled, .key.error {
+.key.disabled {
   background-color: #3a393c;
 }
 
-.big {
-  width: 70px;
-}
-
-.disabled {
-  background-color: #787c7e;
-}
-
-/* Light Theme */
+/* Light Mode */
 .App.light {
   background-color: #f0f0f0;
-  color: #121212;
+  color: black;
 }
 
 .App.light .letter {
@@ -159,28 +162,12 @@ nav h1 {
   color: white;
 }
 
-/* Flip Animation */
-@keyframes flip {
-  0% {
-    transform: rotateX(0deg);
-  }
-  50% {
-    transform: rotateX(90deg);
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
-}
-
-.letter.flip {
-  animation: flip 0.6s ease;
-}
-
-/* Theme Toggle */
+/* Theme Toggle Button */
 .theme-toggle {
   position: absolute;
   right: 20px;
-  top: 15px;
+  margin-top: 30px;
+  transform: translateY(-50%);
   background: white;
   border: 1px solid #888;
   border-radius: 5px;
@@ -197,13 +184,12 @@ nav h1 {
 
 /* Footer */
 footer {
-  margin: 20px;
+  margin: 20px 0 10px;
   text-align: center;
-  font-size: 18px;
-  color: inherit;
+  font-size: 16px;
 }
 
-/* Play Again Button */
+/* Play Again */
 .play-again {
   margin-top: 20px;
   padding: 10px 20px;
@@ -243,63 +229,40 @@ footer {
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
 
-/* 🔽 Responsive Design */
-@media (max-width: 768px) {
-  nav h1 {
-    font-size: 32px;
-  }
-
+/* ✅ MOBILE RESPONSIVE IMPROVEMENTS */
+@media (max-width: 600px) {
   .letter {
-    font-size: 20px;
-    max-width: 45px;
+    width: 12vw;
+    height: 12vw;
+    font-size: 5vw;
   }
 
   .key {
-    font-size: 14px;
-    width: 30px;
-    height: 45px;
+    min-width: 8vw;
+    height: 9vw;
+    font-size: 4vw;
+    padding: 4px;
   }
 
   .big {
-    width: 60px;
+    min-width: 18vw;
   }
 
-  .theme-toggle {
-    font-size: 12px;
-    padding: 4px 8px;
-  }
-
-  .play-again {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
   nav h1 {
     font-size: 24px;
   }
 
-  .letter {
-    font-size: 16px;
-    max-width: 38px;
-  }
-
-  .key {
+  .theme-toggle {
+    padding: 3px 6px;
     font-size: 12px;
-    width: 26px;
-    height: 40px;
   }
 
-  .big {
-    width: 50px;
-  }
-
-  .board {
-    padding: 0 4px;
-  }
-
-  .play-again {
+  footer {
     font-size: 14px;
-    padding: 8px 16px;
+    margin-top: 30px;
+  }
+
+  .keyboard {
+    padding: 10px 5px;
   }
 }
